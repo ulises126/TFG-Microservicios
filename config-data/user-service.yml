@@ -1,0 +1,40 @@
+# Aplication configuration
+server:
+  port: 8092
+  error:
+    include-message: always
+    include-binding-errors: always
+    
+# To see H2 Console in Browser:
+# http://localhost:8091/h2-console
+# Enabling H2 Console
+spring:
+  h2:
+    console:
+      enabled: true
+
+# DB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/usuariosdb
+    username: root
+    password: admin
+
+# JPA #dialect: org.hibernate.dialect.MySQL5Dialect
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+    
+#Conexion a eureka server
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/

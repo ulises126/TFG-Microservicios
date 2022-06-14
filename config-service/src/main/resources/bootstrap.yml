@@ -1,0 +1,20 @@
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+    
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ulises126/TFG-Microservices.git
+          default-label: Microservicios
+          search-paths: config-data
+          username: ulises126
+          password: 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
+  security:
+    user:
+      name: root
+      password: s3cr3t

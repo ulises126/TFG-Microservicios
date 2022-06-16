@@ -25,9 +25,9 @@ spring:
           uri: lb://valoration-service
           predicates:
             - Path=/valoraciones/**
-         # filters:
-        #    - AuthFilter
-       # - id: auth-service
-        #  uri: lb://auth-service
-         # predicates:
-          #  - Path=/auth/**
+          filters:
+            - AuthFilter
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**

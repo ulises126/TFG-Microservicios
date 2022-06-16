@@ -10,7 +10,7 @@ spring:
       server:
         git:
           uri: https://github.com/ulises126/TFG-Microservicios.git
-          default-label: ActuatorSleuth
+          default-label: Auth
           search-paths: config-data
           username: ulises126
           password: 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

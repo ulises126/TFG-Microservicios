@@ -17,6 +17,8 @@ spring:
           uri: lb://publication-service
           predicates:
             - Path=/publicaciones/**, /asignaturas/**, /titulaciones/**
+          filters:
+            - AuthFilter
         - id: user-service
           uri: lb://user-service
           predicates:

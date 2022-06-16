@@ -32,7 +32,7 @@ dependencies {
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '3.1.1'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '2.2.10.RELEASE'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix-dashboard', version: '2.2.2.RELEASE'
-	//implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.6.4'
 	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.1.1'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.28'

@@ -29,10 +29,18 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/usuarios/**
-        - id: valoration-service
+        - id: valoration-service-public
           uri: lb://valoration-service
           predicates:
             - Path=/valoraciones/**
+            - Method=GET
+        - id: valoration-service-private
+          uri: lb://valoration-service
+          predicates:
+            - Path=/valoraciones/**
+            - Method=POST,PUT,DELETE
+          filters:
+            - AuthFilter
         - id: auth-service
           uri: lb://auth-service
           predicates:

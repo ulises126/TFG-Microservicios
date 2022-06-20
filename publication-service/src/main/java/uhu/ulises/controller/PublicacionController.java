@@ -48,7 +48,7 @@ public class PublicacionController {
 		return ResponseEntity.ok(publicacion);
 	}
 	
-	@PostMapping()
+	@PostMapping(value = "")
 	public ResponseEntity<Publicacion> createPublicacion(@RequestBody Publicacion publicacion){
 		publicacion.setFechaPublicacion(new Date());
 		publicacion.setStatus("CREATED");

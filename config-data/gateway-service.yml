@@ -25,10 +25,18 @@ spring:
           predicates:
             - Path=/publicaciones/**, /asignaturas/**, /titulaciones/**
             - Method=GET
-        - id: user-service
+        - id: user-service-public
           uri: lb://user-service
           predicates:
             - Path=/usuarios/**
+            - Method=GET,POST
+        - id: user-service-private
+          uri: lb://user-service
+          predicates:
+            - Path=/usuarios/**
+            - Method=PUT,DELETE
+          filters:
+            - AuthFilter
         - id: valoration-service-public
           uri: lb://valoration-service
           predicates:

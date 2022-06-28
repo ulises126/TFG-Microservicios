@@ -1,14 +1,6 @@
 using AplicacionWebTFG.Servicios;
 
-//var builder = WebApplication.CreateBuilder(args);
-
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    ApplicationName = typeof(Program).Assembly.FullName,
-    ContentRootPath = Directory.GetCurrentDirectory(),
-    EnvironmentName = Environments.Staging,
-    WebRootPath = "customwwwroot"
-});
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

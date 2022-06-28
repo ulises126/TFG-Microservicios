@@ -1,0 +1,109 @@
+﻿@model AplicacionWebTFG.Models.Publicacion
+
+@{
+    ViewData["Title"] = "CrearPublicacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Nueva publicación</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Crear">
+        @{
+            List<SelectListItem> listaTitulaciones = new List<SelectListItem>();
+            //listaTitulaciones.Add(new SelectListItem
+            //    {
+            //        Text = "Todas",
+            //        Value = "0"
+            //    });
+            foreach (var item in Model.listaTitulaciones)
+            {
+                listaTitulaciones.Add(new SelectListItem
+                {
+                    Text = item.nombre,
+                    Value = item.id.ToString()
+                });
+            }
+            List<SelectListItem> listaCursos = new List<SelectListItem>();
+            //listaCursos.Add(new SelectListItem
+            //    {
+            //        Text = "Cualquiera",
+            //        Value = "0"
+            //    });
+            for (int i = 1; i <= 4; i++)
+            {
+                listaCursos.Add(new SelectListItem
+                {
+                    Text = i.ToString(),
+                    Value = i.ToString()
+                });
+            }
+            List<SelectListItem> listaAsignaturas = new List<SelectListItem>();
+            //listaAsignaturas.Add(new SelectListItem
+            //    {
+            //        Text = "Cualquiera",
+            //        Value = "0"
+            //    });
+            foreach (var item in Model.listaAsignaturas)
+            {
+                listaAsignaturas.Add(new SelectListItem
+                {
+                    Text = item.nombre,
+                    Value = item.id.ToString()
+                });
+            }
+            List<SelectListItem> listaModalidades = new List<SelectListItem>();
+            //listaModalidades.Add(new SelectListItem
+            //    {
+            //        Text = "Cualquiera",
+            //        Value = ""
+            //    });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Presencial",
+                Value = "PRESENCIAL"
+            });
+            listaModalidades.Add(new SelectListItem
+                {
+                    Text = "Online",
+                    Value = "ONLINE"
+                });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Mixta",
+                Value = "MIXTA"
+            }); 
+        }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label class="form-label">Titulación</label>
+            @Html.DropDownList("t", listaTitulaciones)
+            <label class="form-label">Curso</label>
+            @Html.DropDownList("c", listaCursos)
+            <label class="form-label">Asignatura</label>
+            @Html.DropDownList("asignatura", listaAsignaturas)
+            <div class="form-group">
+                <label asp-for="titulo" class="control-label">Título</label>
+                <input asp-for="titulo" class="form-control" maxlength="64" />
+                <span asp-validation-for="titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label">Descripción</label>
+                <input asp-for="descripcion" class="form-control" maxlength="512" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precioHora" class="control-label">€/h</label>
+                <input asp-for="precioHora" class="form-control" type="number" step="0.1" min="0"/>
+                <span asp-validation-for="precioHora" class="text-danger"></span>
+            </div>
+            <label class="form-label">Modalidad.</label>
+            @Html.DropDownList("modalidad", listaModalidades)
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

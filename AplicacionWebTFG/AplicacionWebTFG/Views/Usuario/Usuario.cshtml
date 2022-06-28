@@ -1,0 +1,70 @@
+﻿@model AplicacionWebTFG.Models.Usuario
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Usuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>Usuario</h4>
+    <p>Valoración: <a asp-action="ListaValoraciones" asp-controller="Valoracion" asp-route-usuario="@Model.username">@Model.mediaValoraciones/5</a></p>
+    <a asp-action="ListaPublicaciones" asp-controller="Publicacion" asp-route-usuario=@Model.username>Ver publicaciones</a>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nombre de usuario
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.username)
+        </dd>
+        <dt class = "col-sm-2">
+            Nombre de pila
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            Descripción
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            Fecha de Nacimiento
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.fechaNacimiento.ToShortDateString()
+        </dd>
+        <dt class = "col-sm-2">
+            Usuario desde
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fechaRegistro)
+        </dd>
+        <h5>Datos de contacto</h5>
+        <dt class = "col-sm-2">
+            Correo electrónico
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        <dt class = "col-sm-2">
+            Número de teléfono
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.numeroTelefono)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (HttpContextAccessor.HttpContext.Session.GetString("username") != null)
+    {
+        @if (HttpContextAccessor.HttpContext.Session.GetString("username").Equals(Model.username))
+        {
+            <a asp-action="EditarUsuario" asp-controller="Usuario" asp-route-usuario=@Model.username>Editar perfil</a>
+            <form asp-action="CrearPublicacion" asp-controller="Publicacion">
+                <input type="submit" value="Crear publicación" />
+            </form>
+        }
+    }
+</div>

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "IniciarSesionView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Iniciar Sesión</h1>
+
+<div>
+    <form asp-action="GetToken" asp-controller="IniciarSesion" method="post">
+        <label class="form-label">Usuario:</label>
+        <input type="text" class="form-control form-control-sm" id="username" name="username"/>
+        <label class="form-label">Contraseña:</label>
+        <input type="password" class="form-control form-control-sm" id="password" name="password"/>
+        <button type="submit" class="btn btn-success btn-sm">Iniciar sesión.</button>
+    </form>
+    <a asp-action="Registrarse" asp-controller="Registrarse">Registrarse</a>
+</div>
+

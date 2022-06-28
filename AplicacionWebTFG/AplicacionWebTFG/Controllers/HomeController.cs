@@ -27,6 +27,13 @@ namespace AplicacionWebTFG.Controllers
             vp.listaPublicaciones = await _servicioApi.GetListaPublicacionesParam(t, c, a, pMin, pMax, m, ant);
             vp.listaTitulaciones = await _servicioApi.GetListaTitulaciones();
             vp.listaAsignaturas = await _servicioApi.GetListaAsignaturas();
+            vp.tF = t;
+            vp.cF = c;
+            vp.aF = a;
+            vp.pMinF = pMin;
+            vp.pMaxF = pMax;
+            vp.mF = m;
+            vp.antF = ant;
             return View(vp);
         }
 

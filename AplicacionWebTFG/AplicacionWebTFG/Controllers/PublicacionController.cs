@@ -107,9 +107,15 @@ namespace AplicacionWebTFG.Controllers
 
         public async Task<IActionResult> ListaPublicaciones(string usuario)
         {
+            Usuario user = await _servicioApi.GetUsuario(usuario);
+            if(user == null)
+                return NoContent();
             ListaPublicaciones listaModelo = new ListaPublicaciones();
             listaModelo.listaPublicaciones = await _servicioApi.GetListaPublicacionesByUsuario(usuario);
             listaModelo.usuario = usuario;
+            listaModelo.nombre = user.nombre;
+            if (listaModelo.listaPublicaciones == null)
+                listaModelo.listaPublicaciones = new List<Publicacion>();
             return View(listaModelo);
         }
     }

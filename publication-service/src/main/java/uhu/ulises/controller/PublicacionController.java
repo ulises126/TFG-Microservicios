@@ -1,6 +1,7 @@
 package uhu.ulises.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -97,7 +98,21 @@ public class PublicacionController {
 		if(publicaciones == null) {
 			return ResponseEntity.noContent().build();
 		}
+		for (Iterator<Publicacion> iterator = publicaciones.iterator(); iterator.hasNext();) {
+			Publicacion publicacion = (Publicacion) iterator.next();
+			if(publicacion.getStatus().equalsIgnoreCase("DELETED")) {
+				iterator.remove();
+			}
+		}
+		if(publicaciones.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
 		return ResponseEntity.ok(publicaciones);
+		/*List<Publicacion> publicaciones = publicacionService.listByUsuario(usuario);
+		if(publicaciones == null) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(publicaciones);*/
 	}
 	
 	@GetMapping(value = "")

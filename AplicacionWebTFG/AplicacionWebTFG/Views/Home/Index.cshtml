@@ -107,6 +107,46 @@
                 Text = "Últimas 24 horas",
                 Value = "D"
             });
+            //Seleccionamos si había seleccionada
+            if(Model.tF != null)
+            {
+                try
+                {
+                    listaTitulaciones.Where(t => Convert.ToInt32(t.Value) == Model.tF).Select(t => t).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(Model.cF != null)
+            {
+                try
+                {
+                    listaCursos.Where(c => Convert.ToInt32(c.Value) == Model.cF).Select(c => c).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(Model.aF != null)
+            {
+                try
+                {
+                    listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if (Model.pMinF == null)
+                Model.pMinF = 0f;
+            if (Model.pMaxF == null)
+                Model.pMaxF = 50f;
+            if(!String.IsNullOrEmpty(Model.mF))
+            {
+                try
+                {
+                    listaModalidades.Where(m => m.Value.Equals(Model.mF)).Select(m => m).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(!String.IsNullOrEmpty(Model.antF))
+            {
+                try
+                {
+                    listaAntiguedad.Where(ant => ant.Value.Equals(Model.antF)).Select(ant => ant).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
         }
         <label class="form-label">Titulación</label>
         @Html.DropDownList("t", listaTitulaciones)
@@ -115,9 +155,9 @@
         <label class="form-label">Asignatura</label>
         @Html.DropDownList("a", listaAsignaturas)
         <label class="form-label">Precio mín.</label>
-        <input type="number" class="" id="pMin" name="pMin"/>
+        <input type="number" class="" id="pMin" name="pMin" min="0" max="50" value="@Model.pMinF"/>
         <label class="form-label">Precio máx.</label>
-        <input type="number" class="" id="pMax" name="pMax"/>
+        <input type="number" class="" id="pMax" name="pMax"  min="0" max="50" value="@Model.pMaxF"/>
         <label class="form-label">Modalidad.</label>
         @Html.DropDownList("m", listaModalidades)
         <label class="form-label">Antiguedad</label>

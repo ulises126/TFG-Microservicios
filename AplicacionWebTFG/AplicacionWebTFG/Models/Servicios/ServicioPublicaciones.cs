@@ -61,6 +61,9 @@ namespace AplicacionWebTFG.Servicios
                 lista = JsonConvert.DeserializeObject<List<Publicacion>>(json_response);
             }
 
+            if(lista != null)
+                lista = lista.OrderByDescending(p => p.fechaPublicacion).Select(p => p).ToList();
+
             return lista;
         }
 
@@ -98,6 +101,9 @@ namespace AplicacionWebTFG.Servicios
                 lista = JsonConvert.DeserializeObject<List<Publicacion>>(json_response);
             }
 
+            if (lista != null)
+                lista = lista.OrderByDescending(p => p.fechaPublicacion).Select(p => p).ToList();
+
             return lista;
         }
 
@@ -114,6 +120,9 @@ namespace AplicacionWebTFG.Servicios
                 var json_response = await response.Content.ReadAsStringAsync();
                 lista = JsonConvert.DeserializeObject<List<Publicacion>>(json_response);
             }
+
+            if (lista != null)
+                lista = lista.OrderByDescending(p => p.fechaPublicacion).Select(p => p).ToList();
 
             return lista;
         }
@@ -346,6 +355,9 @@ namespace AplicacionWebTFG.Servicios
                 if (cuerpo != null)
                     listaValoraciones = cuerpo;
             }
+
+            if (listaValoraciones != null)
+                listaValoraciones = listaValoraciones.OrderByDescending(p => p.fechaValoracion).Select(p => p).ToList();
 
             return listaValoraciones;
         }

@@ -30,6 +30,7 @@ public class Usuario {
 	private String username;
 	
 	@NotBlank
+	@Size(min=1,max=32)
 	private String nombre;
 	
 	private String descripcion;
@@ -53,4 +54,7 @@ public class Usuario {
 	
 	@Transient
 	private String password;
+	
+	@Transient
+	private float mediaValoraciones;
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uhu.ulises.client.AuthenticationClient;
+import uhu.ulises.client.ValorationClient;
 import uhu.ulises.dto.AuthUser;
 import uhu.ulises.entity.Usuario;
 import uhu.ulises.repository.UsuarioRepository;
@@ -18,6 +19,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
+	private ValorationClient valorationClient;
+	
+	@Autowired
 	private AuthenticationClient authenticationClient;
 	
 	@Override
@@ -27,7 +31,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario getUsuario(String username) {
-		return usuarioRepository.findById(username).orElse(null);
+		Usuario usuario = usuarioRepository.findById(username).orElse(null);
+		if(usuario != null) {
+			float media = (float)valorationClient.getMediaUsuario(username).getBody();
+			usuario.setMediaValoraciones(media);
+		}
+			
+		return usuario;
 	}
 
 	@Override

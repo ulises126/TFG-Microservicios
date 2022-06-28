@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -35,11 +37,15 @@ public class Publicacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Size(min=3, max=64)
 	private String titulo;
 	
+	@Size(min=0, max=512)
 	private String descripcion;
 	
 	@Column(name = "precio_hora")
+	@Min(0)
+	@Max(50)
 	private float precioHora;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -1,0 +1,84 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AplicacionWebTFG
+build_property.RootNamespace = AplicacionWebTFG
+build_property.ProjectDir = C:\workspace\TFG-Services\services\AplicacionWebTFG\AplicacionWebTFG\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\workspace\TFG-Services\services\AplicacionWebTFG\AplicacionWebTFG
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/IniciarSesion/IniciarSesion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5pY2lhclNlc2lvblxJbmljaWFyU2VzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Publicacion/CrearPublicacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25cQ3JlYXJQdWJsaWNhY2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Publicacion/EditarPublicacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25cRWRpdGFyUHVibGljYWNpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Publicacion/ListaPublicaciones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25cTGlzdGFQdWJsaWNhY2lvbmVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Publicacion/Publicacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25cUHVibGljYWNpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Publicacion/PublicacionEliminada.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHVibGljYWNpb25cUHVibGljYWNpb25FbGltaW5hZGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Registrarse/Registrarse.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0cmFyc2VcUmVnaXN0cmFyc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Usuario/EditarUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xFZGl0YXJVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Usuario/Usuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xVc3VhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Valoracion/ListaValoraciones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFsb3JhY2lvblxMaXN0YVZhbG9yYWNpb25lcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/workspace/TFG-Services/services/AplicacionWebTFG/AplicacionWebTFG/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-pwortd9w85

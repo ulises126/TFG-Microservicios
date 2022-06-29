@@ -9,7 +9,6 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Crear">
         @{
             List<SelectListItem> listaTitulaciones = new List<SelectListItem>();
             //listaTitulaciones.Add(new SelectListItem
@@ -39,12 +38,17 @@
                     Value = i.ToString()
                 });
             }
+        }
+        <form asp-action="CrearPublicacion">
+            <label class="form-label">Titulación</label>
+            @Html.DropDownList("t", listaTitulaciones)
+            <label class="form-label">Curso</label>
+            @Html.DropDownList("c", listaCursos)
+            <input type="submit" value="Cargar Asignaturas"/>
+        </form>
+        <form asp-action="Crear">
+        @{
             List<SelectListItem> listaAsignaturas = new List<SelectListItem>();
-            //listaAsignaturas.Add(new SelectListItem
-            //    {
-            //        Text = "Cualquiera",
-            //        Value = "0"
-            //    });
             foreach (var item in Model.listaAsignaturas)
             {
                 listaAsignaturas.Add(new SelectListItem
@@ -54,11 +58,6 @@
                 });
             }
             List<SelectListItem> listaModalidades = new List<SelectListItem>();
-            //listaModalidades.Add(new SelectListItem
-            //    {
-            //        Text = "Cualquiera",
-            //        Value = ""
-            //    });
             listaModalidades.Add(new SelectListItem
             {
                 Text = "Presencial",
@@ -76,20 +75,16 @@
             }); 
         }
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <label class="form-label">Titulación</label>
-            @Html.DropDownList("t", listaTitulaciones)
-            <label class="form-label">Curso</label>
-            @Html.DropDownList("c", listaCursos)
             <label class="form-label">Asignatura</label>
             @Html.DropDownList("asignatura", listaAsignaturas)
             <div class="form-group">
                 <label asp-for="titulo" class="control-label">Título</label>
-                <input asp-for="titulo" class="form-control" maxlength="64" />
+                <input asp-for="titulo" class="form-control" maxlength="64" required="true"/>
                 <span asp-validation-for="titulo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="descripcion" class="control-label">Descripción</label>
-                <input asp-for="descripcion" class="form-control" maxlength="512" />
+                <input asp-for="descripcion" class="form-control" maxlength="512" required="true"/>
                 <span asp-validation-for="descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">

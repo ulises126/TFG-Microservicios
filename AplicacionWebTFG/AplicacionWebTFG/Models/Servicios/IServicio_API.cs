@@ -22,6 +22,7 @@ namespace AplicacionWebTFG.Servicios
         Task<List<Publicacion>> GetListaPublicacionesParam(int? t, int? c, int? a, int? pMin, int? pMax, string m, string ant);
         Task<List<Asignatura>> GetListaAsignaturas(int titulacion, int curso);
         Task<List<Asignatura>> GetListaAsignaturas();
+        Task<Asignatura> GetAsignatura(int a);
         Task<List<Titulacion>> GetListaTitulaciones();
         Task<Publicacion> GetPublicacion(int publicacion);
         Task<long> SavePublicacion(Publicacion publicacion, string token);

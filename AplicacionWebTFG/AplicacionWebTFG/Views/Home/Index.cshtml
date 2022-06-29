@@ -126,7 +126,10 @@
             {
                 try
                 {
-                    listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault().Selected = true;
+                    if(listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault()==null)
+                        listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == 0).Select(a => a).FirstOrDefault().Selected = true;
+                    else
+                        listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault().Selected = true;
                 }catch(Exception){; }
             }
             if (Model.pMinF == null)
@@ -182,3 +185,23 @@
         
   </div>
 </div>
+
+@*@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#ddl").change(function() {
+                var strSelected = "";
+                $("#ddl option:selected").each(function() {
+                    strSelected += $(this)[0].value;
+                });
+                var url = "/Home/MyAction/" + strSelected;
+
+                $.post(url, function(data) {
+                    // do something if necessary
+                });
+            });
+        });
+    </script>
+}*@

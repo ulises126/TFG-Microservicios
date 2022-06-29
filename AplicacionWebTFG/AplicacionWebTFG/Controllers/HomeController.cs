@@ -24,16 +24,33 @@ namespace AplicacionWebTFG.Controllers
         public async Task<IActionResult> Index(int? t, int? c, int? a, int? pMin, int? pMax, string m, string ant)
         {
             VistaPrincipal vp = new VistaPrincipal();
-            vp.listaPublicaciones = await _servicioApi.GetListaPublicacionesParam(t, c, a, pMin, pMax, m, ant);
             vp.listaTitulaciones = await _servicioApi.GetListaTitulaciones();
-            vp.listaAsignaturas = await _servicioApi.GetListaAsignaturas();
+            vp.listaAsignaturas = new List<Asignatura>();
             vp.tF = t;
             vp.cF = c;
-            vp.aF = a;
+            if(t != null && t != 0 && c != null && c != 0)
+            {
+                vp.listaAsignaturas = await _servicioApi.GetListaAsignaturas(Convert.ToInt32(t), Convert.ToInt32(c));
+                
+                if(a != null && a != 0)
+                {
+                    Asignatura asignatura = await _servicioApi.GetAsignatura(Convert.ToInt32(a));
+                    if(asignatura != null && asignatura.id != null && asignatura.id != 0)
+                    {
+                        bool titulacionBien = vp.listaTitulaciones.Where(t => t.id == asignatura.titulacion.id).Select(t => t).Count() == 1;
+                        if(titulacionBien && asignatura.curso == Convert.ToInt32(c))
+                        {
+                            vp.aF = a;
+                        } else { vp.aF = 0; }
+                    } else { vp.aF = 0; }
+                } else { vp.aF = 0; }   
+            }
+            
             vp.pMinF = pMin;
             vp.pMaxF = pMax;
             vp.mF = m;
             vp.antF = ant;
+            vp.listaPublicaciones = await _servicioApi.GetListaPublicacionesParam(t, c, vp.aF, pMin, pMax, m, ant);
             return View(vp);
         }
 

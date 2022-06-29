@@ -67,12 +67,19 @@ namespace AplicacionWebTFG.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CrearPublicacion()
+        public async Task<IActionResult> CrearPublicacion(int? t, int? c)
         {
             if (String.IsNullOrEmpty(HttpContext.Session.GetString("token")))
                 return NoContent();
             Publicacion pub = new Publicacion();
-            pub.listaAsignaturas = await _servicioApi.GetListaAsignaturas();
+            if(t != null && c != null)
+            {
+                pub.listaAsignaturas = await _servicioApi.GetListaAsignaturas(Convert.ToInt32(t), Convert.ToInt32(c));
+            } else
+            {
+                //pub.listaAsignaturas = await _servicioApi.GetListaAsignaturas();
+                pub.listaAsignaturas = new List<Asignatura>();
+            }
             pub.listaTitulaciones = await _servicioApi.GetListaTitulaciones();
             return View(pub);
         }

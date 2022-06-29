@@ -246,6 +246,23 @@ namespace AplicacionWebTFG.Servicios
             return lista;
         }
 
+        public async Task<Asignatura> GetAsignatura(int a)
+        {
+            Asignatura asig = new Asignatura();
+
+            var cliente = new HttpClient();
+            cliente.BaseAddress = new Uri(_baseUrl);
+            var response = await cliente.GetAsync($"asignaturas/{a}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json_response = await response.Content.ReadAsStringAsync();
+                asig = JsonConvert.DeserializeObject<Asignatura>(json_response);
+            }
+
+            return asig;
+        }
+
         public async Task<List<Titulacion>> GetListaTitulaciones()
         {
             List<Titulacion> lista = new List<Titulacion>();

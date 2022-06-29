@@ -51,12 +51,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="titulo" class="control-label">Título</label>
-                <input asp-for="titulo" class="form-control" />
+                <input asp-for="titulo" class="form-control" required="true"/>
                 <span asp-validation-for="titulo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="descripcion" class="control-label">Descripción</label>
-                <input asp-for="descripcion" class="form-control" />
+                <input asp-for="descripcion" class="form-control" required="true"/>
                 <span asp-validation-for="descripcion" class="text-danger"></span>
             </div>
             <div class="form-group">

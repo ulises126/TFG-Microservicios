@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IServicio_API, ServicioPublicaciones>();
+builder.Services.AddScoped<IServicio_API, ServicioAPI>();
 
 builder.Services.AddDistributedMemoryCache();
 

@@ -13,15 +13,14 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace AplicacionWebTFG.Servicios
 {
-    public class ServicioPublicaciones : IServicio_API
+    public class ServicioAPI : IServicio_API
     {
-
 
         #region Constructor y parámetros
 
         private static string _baseUrl;
 
-        public ServicioPublicaciones()
+        public ServicioAPI()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
             _baseUrl = builder.GetSection("ApiSettings:baseUrl").Value;
@@ -402,13 +401,6 @@ namespace AplicacionWebTFG.Servicios
         }
 
         #endregion
-
-
-
-
-
-
-
 
     }
 }

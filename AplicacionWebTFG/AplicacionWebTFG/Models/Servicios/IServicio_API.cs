@@ -15,7 +15,7 @@ namespace AplicacionWebTFG.Servicios
 
         #endregion
 
-        #region Publication.service
+        #region Publication-service
 
         Task<List<Publicacion>> GetListaPublicaciones();
         Task<List<Publicacion>> GetListaPublicacionesByUsuario(string usuario);

@@ -170,7 +170,6 @@ namespace AplicacionWebTFG.Servicios
 
         public async Task<bool> UpdatePublicacion(Publicacion publicacion, string token)
         {
-            //this.Autenticar();
             bool respuesta = false;
 
             var cliente = new HttpClient();

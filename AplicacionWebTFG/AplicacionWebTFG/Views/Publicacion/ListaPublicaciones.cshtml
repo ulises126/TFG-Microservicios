@@ -1,0 +1,41 @@
+﻿@using AplicacionWebTFG.Models
+@model ListaPublicaciones
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (HttpContextAccessor.HttpContext.Session.GetString("token")!=null && !String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("token")))
+{
+    @if (HttpContextAccessor.HttpContext.Session.GetString("username")!=null && !String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("username")))
+    {
+        @if (HttpContextAccessor.HttpContext.Session.GetString("username").Equals(@Model.usuario))
+        {
+            <form asp-action="CrearPublicacion" asp-controller="Publicacion">
+                <input type="submit" value="Crear publicación" />
+            </form>
+        }
+        
+    }
+}
+<div>
+    <h5>@Model.nombre - @Model.usuario</h5>
+</div>
+<div class="card">
+    <div class="card-header">
+        Total: @Model.listaPublicaciones.Count
+    </div>
+    <div class="card-body">
+
+        @foreach(var item in Model.listaPublicaciones)
+        {
+            <div>
+                <h3>@item.titulo</h3>
+                <p>@item.descripcion</p>
+                <p>Precio/hora: @item.precioHora €</p>
+                <a asp-action="Publicacion" asp-controller="Publicacion" asp-route-id="@item.id">Ver detalle</a>
+            </div>
+            <hr />
+        }
+        
+    </div>
+</div>

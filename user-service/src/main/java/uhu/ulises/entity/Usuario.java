@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +30,7 @@ public class Usuario {
 	private String username;
 	
 	@NotBlank
+	@Size(min=1,max=32)
 	private String nombre;
 	
 	private String descripcion;
@@ -50,4 +52,9 @@ public class Usuario {
 	@Column(name = "numero_telefono")
 	private String numeroTelefono;
 	
+	@Transient
+	private String password;
+	
+	@Transient
+	private float mediaValoraciones;
 }

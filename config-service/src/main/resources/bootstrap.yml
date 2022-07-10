@@ -9,8 +9,8 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/ulises126/TFG-Microservices.git
-          default-label: Microservicios
+          uri: https://github.com/ulises126/TFG-Microservicios.git
+          default-label: Auth
           search-paths: config-data
           username: ulises126
           password: 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

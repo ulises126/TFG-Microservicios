@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import uhu.ulises.client.AuthenticationClient;
+import uhu.ulises.client.ValorationClient;
+import uhu.ulises.dto.AuthUser;
 import uhu.ulises.entity.Usuario;
 import uhu.ulises.repository.UsuarioRepository;
 
@@ -15,6 +18,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@Autowired
+	private ValorationClient valorationClient;
+	
+	@Autowired
+	private AuthenticationClient authenticationClient;
+	
 	@Override
 	public List<Usuario> listAllUsuario() {
 		return usuarioRepository.findAll();
@@ -22,13 +31,32 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario getUsuario(String username) {
-		return usuarioRepository.findById(username).orElse(null);
+		Usuario usuario = usuarioRepository.findById(username).orElse(null);
+		if(usuario != null) {
+			float media = (float)valorationClient.getMediaUsuario(username).getBody();
+			usuario.setMediaValoraciones(media);
+		}
+			
+		return usuario;
 	}
 
 	@Override
 	public Usuario createUsuario(Usuario usuario) {
 		usuario.setFechaRegistro(new Date());
-		return usuarioRepository.save(usuario);
+		Usuario userAlta = usuarioRepository.save(usuario);
+		if(userAlta == null) {
+			return null;
+		}
+		AuthUser authUser = AuthUser.builder()
+				.username(usuario.getUsername())
+				.password(usuario.getPassword())
+				.build();
+		AuthUser response = authenticationClient.createAuthUser(authUser).getBody();
+		if(response == null) {
+			this.usuarioRepository.delete(userAlta);
+			return null;
+		}
+		return userAlta;
 	}
 
 	@Override

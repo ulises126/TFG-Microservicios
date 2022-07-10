@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Registrarse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Registrarse</h1>
+
+<div>
+    <form asp-action="RegistrarUsuario" asp-controller="Registrarse" method="post">
+        <label class="form-label">Nombre de usuario:</label>
+        <input type="text" class="form-control form-control-sm" id="username" name="username" maxlength="32"/>
+        <label class="form-label">Contraseña:</label>
+        <input type="password" class="form-control form-control-sm" id="password" name="password" maxlength="64"/>
+        <label class="form-label">Nombre de pila:</label>
+        <input type="text" class="form-control form-control-sm" id="nombre" name="nombre" maxlength="32"/>
+        <label class="form-label">Correo electrónico:</label>
+        <input type="email" class="form-control form-control-sm" id="email" name="email"/>
+        <label class="form-label">Número de teléfono:</label>
+        <input class="form-control form-control-sm" id="numeroTelefono" name="numeroTelefono" maxlength="9"/>
+        <label class="form-label">Cuenta algo sobre ti:</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion"/>
+        <label class="form-label">Fecha de nacimiento:</label>
+        <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento"/>
+        <button type="submit" class="btn btn-success btn-sm">Registrarse.</button>
+    </form>
+    <a asp-action="IniciarSesion" asp-controller="IniciarSesion">Iniciar Sesión</a>
+</div>
+

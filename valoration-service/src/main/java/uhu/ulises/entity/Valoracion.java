@@ -33,7 +33,7 @@ public class Valoracion {
 	@Max(5)
 	private int puntuacion;
 	
-	@Size(min = 0, max = 511)
+	@Size(min = 0, max = 512)
 	private String comentario;
 	
 	@Column(name = "fecha_valoracion")

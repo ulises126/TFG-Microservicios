@@ -1,0 +1,76 @@
+﻿@model AplicacionWebTFG.Models.Publicacion
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Publicacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>@Html.DisplayFor(model => model.titulo)</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Descripción
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            Precio/hora
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.precioHora) €/h
+        </dd>
+        <dt class = "col-sm-2">
+            Asignatura
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.asignatura.nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            Curso
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.asignatura.curso)
+        </dd>
+        <dt class = "col-sm-2">
+            Titulación
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.asignatura.titulacion.nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            Fecha de publicación
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.fechaPublicacion)
+        </dd>
+        <dt class = "col-sm-2">
+            Modalidad
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.modalidad)
+        </dd>
+        <dt class = "col-sm-2">
+            Usuario
+        </dt>
+        <dd class = "col-sm-10">
+            <a asp-action="Usuario" asp-controller="Usuario" asp-route-usuario=@Model.usuario>@Html.DisplayFor(model => model.usuario)</a>
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (HttpContextAccessor.HttpContext.Session.GetString("username") != null)
+    {
+        @if (HttpContextAccessor.HttpContext.Session.GetString("username").Equals(Model.usuario))
+        {
+            <a asp-action="EditarPublicacion" asp-controller="Publicacion" asp-route-id=@Model.id>Editar</a>
+            <a asp-action="Eliminar" asp-controller="Publicacion" asp-route-id=@Model.id>Eliminar</a>
+        }
+        else
+        {
+            <a asp-action="AnadirValoracion" asp-controller="Valoracion" asp-route-id=@Model.id>Añadir valoración</a>
+        }
+    }
+
+</div>

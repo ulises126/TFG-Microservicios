@@ -1,0 +1,79 @@
+﻿@using System.Globalization;
+@model AplicacionWebTFG.Models.Publicacion
+
+@{
+    ViewData["Title"] = "EditarPublicacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditarPublicacion</h1>
+
+<h4>Publicacion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Editar" asp-controller="Publicacion" asp-route-id=@Model.id>
+            @{
+            List<SelectListItem> listaModalidades = new List<SelectListItem>();
+            //listaModalidades.Add(new SelectListItem
+            //    {
+            //        Text = "Cualquiera",
+            //        Value = ""
+            //    });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Presencial",
+                Value = "PRESENCIAL"
+            });
+            listaModalidades.Add(new SelectListItem
+                {
+                    Text = "Online",
+                    Value = "ONLINE"
+                });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Mixta",
+                Value = "MIXTA"
+            });
+            switch (Model.modalidad)
+            {
+                case "ONLINE":
+                    listaModalidades[1].Selected = true;
+                break;
+                case "PRESENCIAL":
+                    listaModalidades[0].Selected = true;
+                break;
+                default:
+                    listaModalidades[2].Selected = true;
+                break;
+            }
+        }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="titulo" class="control-label">Título</label>
+                <input asp-for="titulo" class="form-control" required="true"/>
+                <span asp-validation-for="titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label">Descripción</label>
+                <input asp-for="descripcion" class="form-control" required="true"/>
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="precioHora" class="control-label">€/h</label>
+                <input name="precioHora" class="form-control" type="number" step="0.1" min="0" value="@Model.precioHora.ToString(CultureInfo.InvariantCulture)"/>
+                <span asp-validation-for="precioHora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="modalidad" class="control-label">Modalidad</label>
+                @Html.DropDownList("modalidad", listaModalidades)
+                <span asp-validation-for="modalidad" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

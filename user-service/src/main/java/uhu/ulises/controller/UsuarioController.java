@@ -40,6 +40,7 @@ public class UsuarioController {
 		if(usuarioDB == null) {
 			return ResponseEntity.notFound().build();
 		}
+
 		return ResponseEntity.ok(usuarioDB);
 	}
 	

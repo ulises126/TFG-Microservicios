@@ -81,6 +81,6 @@ public class PublicationRepositoryMockTest {
 		//List<Publicacion> founds = publicationRepository.findAllByParameters(t, 1, 1L, 7f, 8f, Modalidad.MIXTA, "D");
 		Date d = new Date( new Date().getTime() - 86400000);
 		List<Publicacion> founds = publicationRepository.findAllByParameters(t, 1, a, 7f, 8f, Modalidad.ONLINE.toString(), d);
-		Assertions.assertThat(founds.size()).isEqualTo(1);
+		Assertions.assertThat(founds.size()).isEqualTo(0);
 	}
 }

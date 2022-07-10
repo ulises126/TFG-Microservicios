@@ -1,0 +1,207 @@
+﻿@using AplicacionWebTFG.Models
+@model VistaPrincipal
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (HttpContextAccessor.HttpContext.Session.GetString("token")==null || String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("token")))
+{
+    <a asp-action="IniciarSesion" asp-controller="IniciarSesion">Iniciar sesión.</a>
+    <a asp-action="Registrarse" asp-controller="Registrarse">Registrarse.</a>
+}else
+{
+    @if (HttpContextAccessor.HttpContext.Session.GetString("username")!=null && !String.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("username")))
+    {
+        <p>Sesión iniciada como <a asp-action="Usuario" asp-controller="Usuario" asp-route-usuario=@HttpContextAccessor.HttpContext.Session.GetString("username")>@HttpContextAccessor.HttpContext.Session.GetString("username")</a></p>
+        <a asp-action="CerrarSesion" asp-controller="Home">Cerrar sesión.</a>
+        <form asp-action="CrearPublicacion" asp-controller="Publicacion">
+            <input type="submit" value="Crear publicación" />
+        </form>
+    }
+}
+<hr />
+<div>
+    <form asp-action="Index" asp-controller="Home" method="get">
+        @{
+            List<SelectListItem> listaTitulaciones = new List<SelectListItem>();
+            listaTitulaciones.Add(new SelectListItem
+                {
+                    Text = "Todas",
+                    Value = "0"
+                });
+            foreach (var item in Model.listaTitulaciones)
+            {
+                listaTitulaciones.Add(new SelectListItem
+                {
+                    Text = item.nombre,
+                    Value = item.id.ToString()
+                });
+            }
+            List<SelectListItem> listaCursos = new List<SelectListItem>();
+            listaCursos.Add(new SelectListItem
+                {
+                    Text = "Cualquiera",
+                    Value = "0"
+                });
+            for (int i = 1; i <= 4; i++)
+            {
+                listaCursos.Add(new SelectListItem
+                {
+                    Text = i.ToString(),
+                    Value = i.ToString()
+                });
+            }
+            List<SelectListItem> listaAsignaturas = new List<SelectListItem>();
+            listaAsignaturas.Add(new SelectListItem
+                {
+                    Text = "Cualquiera",
+                    Value = "0"
+                });
+            foreach (var item in Model.listaAsignaturas)
+            {
+                listaAsignaturas.Add(new SelectListItem
+                {
+                    Text = item.nombre,
+                    Value = item.id.ToString()
+                });
+            }
+            List<SelectListItem> listaModalidades = new List<SelectListItem>();
+            listaModalidades.Add(new SelectListItem
+                {
+                    Text = "Cualquiera",
+                    Value = ""
+                });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Presencial",
+                Value = "PRESENCIAL"
+            });
+            listaModalidades.Add(new SelectListItem
+                {
+                    Text = "Online",
+                    Value = "ONLINE"
+                });
+            listaModalidades.Add(new SelectListItem
+            {
+                Text = "Mixta",
+                Value = "MIXTA"
+            });
+            List<SelectListItem> listaAntiguedad = new List<SelectListItem>();
+            listaAntiguedad.Add(new SelectListItem
+                {
+                    Text = "Todo el tiempo",
+                    Value = ""
+                });
+            listaAntiguedad.Add(new SelectListItem
+            {
+                Text = "Último año",
+                Value = "A"
+            });
+            listaAntiguedad.Add(new SelectListItem
+                {
+                    Text = "Últimos 30 días",
+                    Value = "M"
+                });
+            listaAntiguedad.Add(new SelectListItem
+            {
+                Text = "Últimas 24 horas",
+                Value = "D"
+            });
+            //Seleccionamos si había seleccionada
+            if(Model.tF != null)
+            {
+                try
+                {
+                    listaTitulaciones.Where(t => Convert.ToInt32(t.Value) == Model.tF).Select(t => t).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(Model.cF != null)
+            {
+                try
+                {
+                    listaCursos.Where(c => Convert.ToInt32(c.Value) == Model.cF).Select(c => c).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(Model.aF != null)
+            {
+                try
+                {
+                    if(listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault()==null)
+                        listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == 0).Select(a => a).FirstOrDefault().Selected = true;
+                    else
+                        listaAsignaturas.Where(a => Convert.ToInt32(a.Value) == Model.aF).Select(a => a).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if (Model.pMinF == null)
+                Model.pMinF = 0f;
+            if (Model.pMaxF == null)
+                Model.pMaxF = 50f;
+            if(!String.IsNullOrEmpty(Model.mF))
+            {
+                try
+                {
+                    listaModalidades.Where(m => m.Value.Equals(Model.mF)).Select(m => m).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+            if(!String.IsNullOrEmpty(Model.antF))
+            {
+                try
+                {
+                    listaAntiguedad.Where(ant => ant.Value.Equals(Model.antF)).Select(ant => ant).FirstOrDefault().Selected = true;
+                }catch(Exception){; }
+            }
+        }
+        <label class="form-label">Titulación</label>
+        @Html.DropDownList("t", listaTitulaciones)
+        <label class="form-label">Curso</label>
+        @Html.DropDownList("c", listaCursos)
+        <label class="form-label">Asignatura</label>
+        @Html.DropDownList("a", listaAsignaturas)
+        <label class="form-label">Precio mín.</label>
+        <input type="number" class="" id="pMin" name="pMin" min="0" max="50" value="@Model.pMinF"/>
+        <label class="form-label">Precio máx.</label>
+        <input type="number" class="" id="pMax" name="pMax"  min="0" max="50" value="@Model.pMaxF"/>
+        <label class="form-label">Modalidad.</label>
+        @Html.DropDownList("m", listaModalidades)
+        <label class="form-label">Antiguedad</label>
+        @Html.DropDownList("ant", listaAntiguedad)
+        <button type="submit" class="btn btn-success btn-sm">Actualizar</button>
+    </form>
+</div>
+<hr />
+<div class="card">
+  <div class="card-body">
+
+        @foreach(var item in Model.listaPublicaciones)
+        {
+            <div>
+                <h3>@item.titulo</h3>
+                <p>@item.descripcion</p>
+                <p>Precio/hora: @item.precioHora €</p>
+                <a asp-action="Publicacion" asp-controller="Publicacion" asp-route-id="@item.id">Ver detalle</a>
+            </div>
+            <hr />
+        }
+        
+  </div>
+</div>
+
+@*@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#ddl").change(function() {
+                var strSelected = "";
+                $("#ddl option:selected").each(function() {
+                    strSelected += $(this)[0].value;
+                });
+                var url = "/Home/MyAction/" + strSelected;
+
+                $.post(url, function(data) {
+                    // do something if necessary
+                });
+            });
+        });
+    </script>
+}*@

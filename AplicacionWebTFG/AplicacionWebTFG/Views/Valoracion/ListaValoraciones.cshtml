@@ -1,0 +1,26 @@
+﻿@using AplicacionWebTFG.Models
+@model ListaValoraciones
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h5>@Model.nombre</h5>
+<p>@Model.username</p>
+<div class="card">
+    <div class="card-header">
+        Media: @Model.valoracionMedia  -  Total: @Model.listaValoraciones.Count
+    </div>
+    <div class="card-body">
+
+        @foreach(var item in Model.listaValoraciones)
+        {
+            <div>
+                <h4>@item.nombre - <a asp-action="Publicacion" asp-controller="Publicacion" asp-route-id="@item.valoracionIdentity.idPublicacion">@item.tituloPublicacion</a></h4>
+                <p>@item.puntuacion/5</p>
+                <p>@item.comentario</p>
+                <p>@item.fechaValoracion</p>
+            </div>
+            <hr />
+        }  
+    </div>
+</div>

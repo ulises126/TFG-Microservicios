@@ -2,6 +2,8 @@ package uhu.ulises.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ public class ValoracionController {
 
 	@Autowired
 	private ValoracionService valoracionService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ValoracionController.class);
 	
 	@GetMapping(value = "")
 	public ResponseEntity<List<Valoracion>> listAllValoraciones() {
@@ -77,16 +81,19 @@ public class ValoracionController {
 	
 	@GetMapping(value = "/{usuario}/media")
 	public ResponseEntity<Float> getPuntuacionMedia(@PathVariable String usuario) {
+		logger.info("/valoraciones/" + usuario + "/media");
 		float media = valoracionService.getPuntuacionMediaByUsuario(usuario);
 		return ResponseEntity.ok(media);
 	}
 	
 	@GetMapping(value = "/{usuario}")
 	public ResponseEntity<List<Valoracion>> listAllValoracionesByUsuario(@PathVariable String usuario) {
+		logger.info("/valoraciones/" + usuario);
 		List<Valoracion> listaValoraciones = valoracionService.listValoracionesByUsuario(usuario);
 		if(listaValoraciones == null) {
 			return ResponseEntity.noContent().build();
 		}
+		
 		return ResponseEntity.ok(listaValoraciones);
 	}
 }

@@ -13,21 +13,43 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: publication-service
+        - id: publication-service-private
           uri: lb://publication-service
           predicates:
             - Path=/publicaciones/**, /asignaturas/**, /titulaciones/**
-        - id: user-service
+            - Method=POST,PUT,DELETE
+          filters:
+            - AuthFilter
+        - id: publication-service-public
+          uri: lb://publication-service
+          predicates:
+            - Path=/publicaciones/**, /asignaturas/**, /titulaciones/**
+            - Method=GET
+        - id: user-service-public
           uri: lb://user-service
           predicates:
             - Path=/usuarios/**
-        - id: valoration-service
+            - Method=GET,POST
+        - id: user-service-private
+          uri: lb://user-service
+          predicates:
+            - Path=/usuarios/**
+            - Method=PUT,DELETE
+          filters:
+            - AuthFilter
+        - id: valoration-service-public
           uri: lb://valoration-service
           predicates:
             - Path=/valoraciones/**
-         # filters:
-        #    - AuthFilter
-       # - id: auth-service
-        #  uri: lb://auth-service
-         # predicates:
-          #  - Path=/auth/**
+            - Method=GET
+        - id: valoration-service-private
+          uri: lb://valoration-service
+          predicates:
+            - Path=/valoraciones/**
+            - Method=POST,PUT,DELETE
+          filters:
+            - AuthFilter
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**

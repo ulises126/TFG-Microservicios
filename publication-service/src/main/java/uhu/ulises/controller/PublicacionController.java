@@ -1,8 +1,11 @@
 package uhu.ulises.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +33,8 @@ public class PublicacionController {
 	@Autowired
 	private PublicacionService publicacionService;
 	
+	private static final Logger logger = LoggerFactory.getLogger(PublicacionController.class);
+	
 	@GetMapping(value = "/sinparametros")
 	public ResponseEntity<List<Publicacion>> listPublicaciones(){
 		List<Publicacion> publicaciones = publicacionService.listAllPublicacion();
@@ -48,7 +53,7 @@ public class PublicacionController {
 		return ResponseEntity.ok(publicacion);
 	}
 	
-	@PostMapping()
+	@PostMapping(value = "")
 	public ResponseEntity<Publicacion> createPublicacion(@RequestBody Publicacion publicacion){
 		publicacion.setFechaPublicacion(new Date());
 		publicacion.setStatus("CREATED");
@@ -79,6 +84,7 @@ public class PublicacionController {
 	
 	@GetMapping(value = "/publicacionesid/{usuario}")
 	public ResponseEntity<List<PublicacionValoracionDTO>> listPublicacionesId(@PathVariable String usuario) {
+		logger.info("/publicacionesid/" + usuario);
 		List<PublicacionValoracionDTO> publicacionesId = publicacionService.findPublicacionesIdByUsuario(usuario);
 		if(publicacionesId == null) {
 			return ResponseEntity.noContent().build();
@@ -92,7 +98,21 @@ public class PublicacionController {
 		if(publicaciones == null) {
 			return ResponseEntity.noContent().build();
 		}
+		for (Iterator<Publicacion> iterator = publicaciones.iterator(); iterator.hasNext();) {
+			Publicacion publicacion = (Publicacion) iterator.next();
+			if(publicacion.getStatus().equalsIgnoreCase("DELETED")) {
+				iterator.remove();
+			}
+		}
+		if(publicaciones.isEmpty()) {
+			return ResponseEntity.noContent().build();
+		}
 		return ResponseEntity.ok(publicaciones);
+		/*List<Publicacion> publicaciones = publicacionService.listByUsuario(usuario);
+		if(publicaciones == null) {
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(publicaciones);*/
 	}
 	
 	@GetMapping(value = "")

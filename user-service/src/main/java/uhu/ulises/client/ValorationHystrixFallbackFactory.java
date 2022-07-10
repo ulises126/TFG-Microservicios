@@ -8,7 +8,7 @@ public class ValorationHystrixFallbackFactory implements ValorationClient{
 
 	@Override
 	public ResponseEntity<Float> getMediaUsuario(String usuario) {
-		return ResponseEntity.ok((Float)0.0f);
+		return ResponseEntity.ok(-(Float)1.0f);
 	}
 
 }

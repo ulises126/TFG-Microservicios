@@ -7,7 +7,15 @@
 
 <div>
     <h4>Usuario</h4>
-    <p>Valoración: <a asp-action="ListaValoraciones" asp-controller="Valoracion" asp-route-usuario="@Model.username">@Model.mediaValoraciones/5</a></p>
+    @{
+        if(@Model.mediaValoraciones == -1)
+        {
+            <p>Valoración: Servicio no disponible</p>
+        } else
+        {
+            <p>Valoración: <a asp-action="ListaValoraciones" asp-controller="Valoracion" asp-route-usuario="@Model.username">@Model.mediaValoraciones/5</a></p>
+        }
+    }
     <a asp-action="ListaPublicaciones" asp-controller="Publicacion" asp-route-usuario=@Model.username>Ver publicaciones</a>
     <hr />
     <dl class="row">
